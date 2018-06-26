@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/shabunin/redis-ipc/issues"
   },
-  "homepage": "https://github.com/shabunin/redis-ipc#readme"
+  "homepage": "https://github.com/shabunin/redis-ipc#readme",
+  "dependencies": {
+    "redis": "^2.8.0"
+  }
 }

@@ -4,7 +4,7 @@ const redis = require('redis');
 const _IPC = (params) => {
   let self = new EE();
   // debugging
-  self._debug = true;
+  self._debug = false;
   if (Object.prototype.hasOwnProperty.call(params, 'debug')) {
     self._debug = params.debug;
   }
@@ -64,17 +64,23 @@ const _IPC = (params) => {
   self.subscribe = (channel) => {
     let _ee = new EE();
     self._client.sub.on('subscribe', (_channel, _count) => {
-      self.debug(`Redis client.sub subscribed to ${_channel}, ${_count}`);
-      _ee.emit('subscribe')
+      if (_channel === channel) {
+        self.debug(`Redis client.sub subscribed to "${_channel}", ${_count}`);
+        _ee.emit('subscribe');
+      }
     });
     self._client.sub.on('message', (_channel, _message) => {
       if (_channel === channel) {
-        self.debug(`Redis client.sub got message: ${_message} from channel ${_channel}`);
+        self.debug(`Redis client.sub got message: "${_message}" from channel "${_channel}"`);
         _ee.emit('message', _message);
       }
     });
     self._client.sub.subscribe(channel);
     return _ee;
+  };
+
+  self.unsubscribe = (channel) => {
+    self._client.sub.unsubscribe(channel);
   };
 
   self.publish = (channel, message) => {
