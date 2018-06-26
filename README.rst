@@ -1,4 +1,6 @@
-## Redis-ipc
+============
+redis-ipc
+============
 
 Simple package to publish/subscribe to IPC channels.
 
