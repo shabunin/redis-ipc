@@ -21,7 +21,7 @@ myIPC.on('connect', _ => {
         .subscribe('hello')
         .on('subscribe', _ => {
           myIPC
-            .publish('hello', 'meow');
+            .publish('hello', 'friend');
         })
         .on('message', message => {
           console.log(`another message: ${message}`);

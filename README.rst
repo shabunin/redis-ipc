@@ -59,7 +59,7 @@ So, we combine this two redis client instances in one object and expose function
             .subscribe('hello')
             .on('subscribe', _ => {
               myIPC
-                .publish('hello', 'meow');
+                .publish('hello', 'friend');
             })
             .on('message', message => {
               console.log(`another message: ${message}`);
