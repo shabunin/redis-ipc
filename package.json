@@ -1,6 +1,6 @@
 {
   "name": "redis-ipc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple redis pub/sub module. Two redis client instances in one object.",
   "main": "index.js",
   "scripts": {
