@@ -54,6 +54,7 @@ const _IPC = params => {
     }
 
     self.debug(`Connecting to ${self.path}`);
+
     // now connect both
     return self._client
       .connectPublisher()
