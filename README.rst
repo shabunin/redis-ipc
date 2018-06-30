@@ -71,3 +71,5 @@ So, we combine this two redis client instances in one object and expose function
     myIPC.on('error', err => {
       console.log(`err ${err}`)
     });
+
+    myIPC.connect();
