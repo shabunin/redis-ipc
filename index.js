@@ -48,20 +48,26 @@ const _IPC = params => {
     });
   };
 
-  // now connect both
-  self._client
-    .connectPublisher()
-    .then(_ => {
-      return self._client.connectSubscriber();
-    })
-    .then(_ => {
-      self.debug(`Redis client.pub/sub connected`);
-      self.emit('connect');
-    })
-    .catch(err => {
-      self.debug(`Redis client.pub/sub error ${err}`);
-    });
+  self.connect = path => {
+    if (typeof path !== 'undefined') {
+      self.path = path;
+    }
 
+    self.debug(`Connecting to ${self.path}`);
+    // now connect both
+    return self._client
+      .connectPublisher()
+      .then(_ => {
+        return self._client.connectSubscriber();
+      })
+      .then(_ => {
+        self.debug(`Redis client.pub/sub connected`);
+        self.emit('connect');
+      })
+      .catch(err => {
+        self.debug(`Redis client.pub/sub error ${err}`);
+      });
+  };
   // public funcs
   self.subscribe = channel => {
     let _ee = new EE();

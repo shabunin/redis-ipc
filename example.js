@@ -1,6 +1,8 @@
 const IPC = require('./index');
 
-let myIPC = IPC();
+let myIPC = IPC({
+  debug: true
+});
 
 myIPC.on('connect', _ => {
   console.log('connect event');
@@ -27,3 +29,5 @@ myIPC.on('connect', _ => {
 myIPC.on('error', err => {
   console.log(`err ${err}`);
 });
+
+myIPC.connect();
