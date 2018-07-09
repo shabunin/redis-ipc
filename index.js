@@ -24,11 +24,11 @@ const _IPC = params => {
   self._client.connectPublisher = _ => {
     return new Promise((resolve, reject) => {
       self._client.pub = redis.createClient(self.path);
-      self._client.pub.on('connect', _ => {
+      self._client.pub.once('connect', _ => {
         self.debug(`Redis client.pub connected`);
         resolve();
       });
-      self._client.pub.on('error', err => {
+      self._client.pub.once('error', err => {
         self.debug(`Redis client.pub error ${err}`);
         reject(err);
       });
@@ -37,11 +37,11 @@ const _IPC = params => {
   self._client.connectSubscriber = _ => {
     return new Promise((resolve, reject) => {
       self._client.sub = redis.createClient(self.path);
-      self._client.sub.on('connect', _ => {
+      self._client.sub.once('connect', _ => {
         self.debug(`Redis client.sub connected`);
         resolve();
       });
-      self._client.sub.on('error', err => {
+      self._client.sub.once('error', err => {
         self.debug(`Redis client.sub error ${err}`);
         reject(err);
       });
